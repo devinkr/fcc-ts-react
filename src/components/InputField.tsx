@@ -22,7 +22,7 @@ function InputField({ todo, setTodo, handleAdd }: Props) {
 				value={todo}
 				onChange={(e) => setTodo(e.target.value)}
 				placeholder='Enter a task'
-				className='input_box'
+				className='input__box'
 			/>
 			<button className='input_submit' type='submit'>
 				Go
