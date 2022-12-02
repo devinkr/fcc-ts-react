@@ -1,5 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
+import InputField from './components/InputField';
+import { Todo } from './model';
+
+const App = () => {
+	const [todo, setTodo] = useState<string>('');
+	const [todos, setTodos] = useState<Todo[]>([]);
+
+	function handleAdd(e: React.FormEvent) {
+		e.preventDefault();
+		if (todo) {
+			setTodos([...todos, { id: Date.now(), todo, isDone: false }]);
+			setTodo('');
+		}
+	}
+
+	console.log(todos);
+
+	return (
+		<div className='App'>
+			<span className='heading'>Taskify</span>
+			<InputField
+				todo={todo}
+				setTodo={setTodo}
+				handleAdd={handleAdd}></InputField>
+			<ul>
+				{todos.map((todo) => (
+					<li>{todo.todo}</li>
+				))}
+			</ul>
+		</div>
+	);
+};
+
+export default App;
 
 // let name: string;
 // let age: number | string;
@@ -38,7 +72,7 @@ import './App.css';
 //   b: number;
 // }
 
-// & is the same as extends with interface. 
+// & is the same as extends with interface.
 // type Y = X & {
 //   c: string;
 //   d: number;
@@ -48,11 +82,3 @@ import './App.css';
 //   c: 'efwef',
 //   d: 34
 // }
-
-function App() {
-  return (
-    <div>Hello World</div>
-  );
-}
-
-export default App;
