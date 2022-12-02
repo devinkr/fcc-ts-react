@@ -1,13 +1,23 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import './styles.css';
+import { Todo } from '../model';
 
 interface Props {
-	todo: string;
-	setTodo: React.Dispatch<React.SetStateAction<string>>;
-	handleAdd: (e: React.FormEvent) => void;
+	todos: Todo[];
+	setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 }
 
-function InputField({ todo, setTodo, handleAdd }: Props) {
+function InputField({ todos, setTodos }: Props) {
+	const [todo, setTodo] = useState<string>('');
+
+	function handleAdd(e: React.FormEvent) {
+		e.preventDefault();
+		if (todo) {
+			setTodos([...todos, { id: Date.now(), todo, isDone: false }]);
+			setTodo('');
+		}
+	}
+
 	const inputRef = useRef<HTMLInputElement>(null);
 	return (
 		<form
