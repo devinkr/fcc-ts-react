@@ -3,18 +3,25 @@ import './App.css';
 import InputField from './components/InputField';
 import { Todo } from './model';
 import TodoList from './components/TodoList';
+import { DragDropContext } from 'react-beautiful-dnd';
 
 const App = () => {
 	const [todos, setTodos] = useState<Todo[]>([]);
-
-	console.log(todos);
+	const [completedTodos, setCompletedTodos] = useState<Todo[]>([]);
 
 	return (
-		<div className='App'>
-			<span className='heading'>Taskify</span>
-			<InputField todos={todos} setTodos={setTodos} />
-			<TodoList todos={todos} setTodos={setTodos} />
-		</div>
+		<DragDropContext onDragEnd={() => {}}>
+			<div className='App'>
+				<span className='heading'>Taskify</span>
+				<InputField todos={todos} setTodos={setTodos} />
+				<TodoList
+					todos={todos}
+					setTodos={setTodos}
+					completedTodos={completedTodos}
+					setCompletedTodos={setCompletedTodos}
+				/>
+			</div>
+		</DragDropContext>
 	);
 };
 
